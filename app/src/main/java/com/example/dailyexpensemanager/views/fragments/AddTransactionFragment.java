@@ -129,9 +129,9 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
 
                 ArrayList<AccountsModel> accountsModelArrayList = new ArrayList<>();
                 accountsModelArrayList.add(new AccountsModel(0, "Cash"));
-                accountsModelArrayList.add(new AccountsModel(0, "Bank"));
-                accountsModelArrayList.add(new AccountsModel(0, "Card"));
-                accountsModelArrayList.add(new AccountsModel(0, "Other"));
+                accountsModelArrayList.add(new AccountsModel(1, "Bank"));
+                accountsModelArrayList.add(new AccountsModel(2, "Card"));
+                accountsModelArrayList.add(new AccountsModel(3, "Other"));
 
                 AccountsAdapter accountsAdapter = new AccountsAdapter(getContext(), accountsModelArrayList, new AccountsAdapter.AccountsClickListener() {
                     @Override
