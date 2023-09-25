@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class Constants {
     public static String INCOME = "Income";
     public static String EXPENSE = "Expense";
-//    public static String CASH = "Cash";
-//    public static String CARD = "Card";
-//    public static String BANK = "Bank";
-//    public static String OTHER = "Other";
+    public static String CASH = "Cash";
+    public static String CARD = "Card";
+    public static String BANK = "Bank";
+    public static String OTHER = "Other";
 
     public static int SELECTED_TAB = 0;
     public static int DAILY = 0;
