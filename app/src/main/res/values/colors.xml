@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="orange">#CA1700</color>
+    <color name="green">#78CA1A</color>
+    <color name="dark_green">#005004</color>
+    <color name="blue">#19A2E1</color>
+    <color name="default_textcolor">#353535</color>
+    <color name="incomeButton_textColor">#4CAF50</color>
+    <color name="category_salary">#F44336</color>
+    <color name="category_business">#9C27B0</color>
+    <color name="category_investment">#2196F3</color>
+    <color name="category_rent">#E91E63</color>
+    <color name="category_loan">#B48C13</color>
+    <color name="category_other">#4CAF50</color>
+    <color name="expenseButton_textColor">#F44336</color>
+    <color name="bank_color">#A8004175</color>
+    <color name="cash_color">#A8007502</color>
+    <color name="card_color">#A8750033</color>
+    <color name="other_color">#A8303030</color>
+</resources>
