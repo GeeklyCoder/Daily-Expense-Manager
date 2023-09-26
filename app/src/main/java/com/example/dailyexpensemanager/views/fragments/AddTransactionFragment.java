@@ -155,6 +155,7 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
                         Double.parseDouble(binding.selectAmountEditText.getText().toString());
                 String note =
                         binding.noteEditText.getText().toString();
+                String title = binding.titleEditText.getText().toString();
 
                 if (transactionModel.getTransactionType().equals(Constants.EXPENSE)) {
                     transactionModel.setTransactionAmount(amount*-1);
@@ -162,6 +163,7 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
                     transactionModel.setTransactionAmount(amount);
                 }
                 transactionModel.setTransactionNote(note);
+                transactionModel.setTransactionTitle(title);
                 ((MainActivity)getActivity()).mainViewModel.addTransactions(transactionModel);
                 ((MainActivity)getActivity()).getTransactions();
                 dismiss();

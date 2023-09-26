@@ -44,12 +44,14 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
         holder.binding.transactionAccountTypeTextView.setText(transactionModel.getTransactionAccount());
         holder.binding.transactionDateTextView.setText(Helper.formatDate(transactionModel.getDate()));
         holder.binding.transactionCategoryTextView.setText(transactionModel.getTransactionCategory());
+        holder.binding.transactionTitleTextView.setText(transactionModel.getTransactionTitle());
 
         CategoryModel transactionCategory = Constants.getCategoryDetails(transactionModel.getTransactionCategory());
 
         holder.binding.transactionCategoryImageView.setImageResource(transactionCategory.getCategoryImage());
         holder.binding.transactionCategoryImageView.setBackgroundTintList(context.getColorStateList(transactionCategory.getCategoryColor()));
         holder.binding.transactionAccountTypeTextView.setBackgroundTintList(context.getColorStateList(Constants.getAccountColor(transactionModel.getTransactionAccount())));
+
 
         if (transactionModel.getTransactionType().equals(Constants.EXPENSE)) {
             holder.binding.transactionAmountlTextView.setTextColor(context.getColor(R.color.expenseButton_textColor));

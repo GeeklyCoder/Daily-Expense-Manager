@@ -45,7 +45,26 @@
                     android:padding="10dp"
                     android:text="Expense"
                     android:textColor="@color/black" />
+
             </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:focusable="true"
+                android:hint="Title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -60,7 +79,6 @@
                     android:layout_height="wrap_content"
                     android:enabled="true"
                     android:focusable="false"
-                    android:hint="hint"
                     android:inputType="date"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -77,9 +95,8 @@
                     android:id="@+id/selectAmountEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:hint="hint"
                     android:enabled="true"
+                    android:focusable="true"
                     android:inputType="number"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +114,6 @@
                     android:layout_height="wrap_content"
                     android:enabled="true"
                     android:focusable="false"
-                    android:hint="hint"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,7 +130,6 @@
                     android:layout_height="wrap_content"
                     android:enabled="true"
                     android:focusable="false"
-                    android:hint="Account"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,9 +145,8 @@
                     android:id="@+id/noteEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
                     android:enabled="true"
-                    android:hint="hint"
+                    android:focusable="true"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 

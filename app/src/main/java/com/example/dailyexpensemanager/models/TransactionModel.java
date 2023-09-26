@@ -6,19 +6,20 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class TransactionModel extends RealmObject {
-    private String transactionType, transactionCategory, transactionAccount, transactionNote;
+    private String transactionType, transactionCategory, transactionAccount, transactionNote, transactionTitle;
     private Date date;
     private double transactionAmount;
     @PrimaryKey
     private long id;
 
-    public TransactionModel(double transactionAmount, String transactionType, String transactionCategory, String transactionAccount, String transactionNote, Date date, long id) {
+    public TransactionModel(double transactionAmount, String transactionType, String transactionCategory, String transactionAccount, String transactionNote, Date date, long id, String transactionTitle) {
         this.transactionType = transactionType;
         this.transactionCategory = transactionCategory;
         this.transactionAccount = transactionAccount;
         this.transactionNote = transactionNote;
         this.date = date;
         this.transactionAmount = transactionAmount;
+        this.transactionTitle = transactionTitle;
         this.id = id;
     }
 
@@ -40,6 +41,14 @@ public class TransactionModel extends RealmObject {
 
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public String getTransactionTitle() {
+        return transactionTitle;
+    }
+
+    public void setTransactionTitle(String transactionTitle) {
+        this.transactionTitle = transactionTitle;
     }
 
     public String getTransactionCategory() {
