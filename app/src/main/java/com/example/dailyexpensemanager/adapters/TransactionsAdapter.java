@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,6 +67,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
                         new AlertDialog.Builder(context).create();
                 deleteDialog.setTitle("Delete Transaction");
                 deleteDialog.setMessage("Are you sure you want to DELETE this transaction?");
+
                 deleteDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

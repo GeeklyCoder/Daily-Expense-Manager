@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     calendar.add(Calendar.MONTH, -1);
                 }
                 updateDate();
+                Log.d("Button Clicked : ", "Previous Date Button Clicked!");
             }
         });
 
