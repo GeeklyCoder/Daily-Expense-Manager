@@ -74,10 +74,8 @@ public class MainViewModel extends AndroidViewModel {
         } else if (Constants.SELECTED_TAB == Constants.MONTHLY) {
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             Date startTime = calendar.getTime();
-
-            // Set calendar to the last day of the selected month
             calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-            Date endTime = new Date(calendar.getTimeInMillis() + (24 * 60 * 60 * 1000)); // Add one day to include the last day
+            Date endTime = new Date(calendar.getTimeInMillis() + (24 * 60 * 60 * 1000));
 
             newTransactionsRealmResults = realm.where(TransactionModel.class)
                     .greaterThanOrEqualTo("date", startTime)

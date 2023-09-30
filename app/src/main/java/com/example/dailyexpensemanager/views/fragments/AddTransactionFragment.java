@@ -46,6 +46,7 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
     FragmentAddTransactionBinding binding;
     TransactionModel transactionModel;
     int selectedTab = 0;
+    boolean typeSelected = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +62,7 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
                 binding.expenseButton.setTextColor(getContext().getColor(R.color.default_textcolor));
                 binding.incomeButton.setTextColor(getContext().getColor(R.color.incomeButton_textColor));
                 transactionModel.setTransactionType(Constants.INCOME);
+                typeSelected = true;
             }
         });
 
@@ -72,6 +74,7 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
                 binding.expenseButton.setTextColor(getContext().getColor(R.color.expenseButton_textColor));
                 binding.incomeButton.setTextColor(getContext().getColor(R.color.default_textcolor));
                 transactionModel.setTransactionType(Constants.EXPENSE);
+                typeSelected = true;
             }
         });
 
@@ -151,22 +154,53 @@ public class AddTransactionFragment extends BottomSheetDialogFragment {
         binding.saveTransactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double amount =
-                        Double.parseDouble(binding.selectAmountEditText.getText().toString());
-                String note =
-                        binding.noteEditText.getText().toString();
-                String title = binding.titleEditText.getText().toString();
+                if (!typeSelected || binding.titleEditText.getText().toString().isEmpty() ||
+                        binding.selectDateEditText.getText().toString().isEmpty() ||
+                        binding.selectAmountEditText.getText().toString().isEmpty() ||
+                        binding.selectCategoryEditText.getText().toString().isEmpty() ||
+                        binding.selectAccountEditText.getText().toString().isEmpty()) {
+                    if (!typeSelected) {
+                        binding.incomeButton.setError("Please Choose either of the transaction type!");
+                        binding.expenseButton.setError("Please Choose either of the transaction type!");
+                    }
 
-                if (transactionModel.getTransactionType().equals(Constants.EXPENSE)) {
-                    transactionModel.setTransactionAmount(amount*-1);
+                    if (binding.titleEditText.getText().toString().isEmpty()) {
+                        binding.titleEditText.setError("Please enter a title for the transaction!");
+                    }
+
+                    if (binding.selectDateEditText.getText().toString().isEmpty()) {
+                        binding.selectDateEditText.setError("Please select a date for the transaction!");
+                    }
+
+                    if (binding.selectAmountEditText.getText().toString().isEmpty()) {
+                        binding.selectAmountEditText.setError("Please enter an amount of the transaction!");
+                    }
+
+                    if (binding.selectCategoryEditText.getText().toString().isEmpty()) {
+                        binding.selectCategoryEditText.setError("Please select a category of the transaction!");
+                    }
+
+                    if (binding.selectAccountEditText.getText().toString().isEmpty()) {
+                        binding.selectAccountEditText.setError("Please select an account for the transaction!");
+                    }
                 } else {
-                    transactionModel.setTransactionAmount(amount);
+                    double amount =
+                            Double.parseDouble(binding.selectAmountEditText.getText().toString());
+                    String note =
+                            binding.noteEditText.getText().toString();
+                    String title = binding.titleEditText.getText().toString();
+
+                    if (transactionModel.getTransactionType().equals(Constants.EXPENSE)) {
+                        transactionModel.setTransactionAmount(amount*-1);
+                    } else {
+                        transactionModel.setTransactionAmount(amount);
+                    }
+                    transactionModel.setTransactionNote(note);
+                    transactionModel.setTransactionTitle(title);
+                    ((MainActivity)getActivity()).mainViewModel.addTransactions(transactionModel);
+                    ((MainActivity)getActivity()).getTransactions();
+                    dismiss();
                 }
-                transactionModel.setTransactionNote(note);
-                transactionModel.setTransactionTitle(title);
-                ((MainActivity)getActivity()).mainViewModel.addTransactions(transactionModel);
-                ((MainActivity)getActivity()).getTransactions();
-                dismiss();
             }
         });
 
