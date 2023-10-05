@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                         updateDate();
                         Toast.makeText(MainActivity.this, "Day", Toast.LENGTH_SHORT).show();
                         break;
-
                     default:
                         break;
                 }
