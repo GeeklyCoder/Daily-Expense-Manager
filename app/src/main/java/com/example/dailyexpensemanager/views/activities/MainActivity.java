@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -21,15 +20,13 @@ import com.example.dailyexpensemanager.R;
 import com.example.dailyexpensemanager.databinding.ActivityMainBinding;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
-import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
-    Calendar calendar;
+    Calendar monthlyCalendar;
+    Calendar dailyCalendar;
     ActivityMainBinding binding;
     public MainViewModel mainViewModel;
 
@@ -46,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         //Initializing variables
-        calendar = Calendar.getInstance();
+        monthlyCalendar = Calendar.getInstance();
+        dailyCalendar = Calendar.getInstance();
         updateDate();
 
         binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Constants.SELECTED_TAB == Constants.DAILY) {
-                    calendar.add(Calendar.DATE, 1);
+                    dailyCalendar.add(Calendar.DATE, 1);
                 } else if (Constants.SELECTED_TAB == Constants.MONTHLY){
-                    calendar.add(Calendar.MONTH, 1);
+                    monthlyCalendar.add(Calendar.MONTH, 1);
                 }
                 updateDate();
             }
@@ -72,12 +70,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Constants.SELECTED_TAB == Constants.DAILY) {
-                    calendar.add(Calendar.DATE, -1);
+                    dailyCalendar.add(Calendar.DATE, -1);
                 } else if (Constants.SELECTED_TAB == Constants.MONTHLY){
-                    calendar.add(Calendar.MONTH, -1);
+                    monthlyCalendar.add(Calendar.MONTH, -1);
                 }
                 updateDate();
-                Log.d("Button Clicked : ", "Previous Date Button Clicked!");
             }
         });
 
@@ -87,13 +84,15 @@ public class MainActivity extends AppCompatActivity {
                 String selectedTabName = tab.getText().toString();
                 switch (selectedTabName) {
                     case "Monthly" :
-                        Constants.SELECTED_TAB = 1;
+                        Constants.SELECTED_TAB = Constants.MONTHLY;
+                        dailyCalendar = Calendar.getInstance();
                         updateDate();
                         Toast.makeText(MainActivity.this, "Month", Toast.LENGTH_SHORT).show();
                         break;
 
                     case "Daily":
-                        Constants.SELECTED_TAB = 0;
+                        Constants.SELECTED_TAB = Constants.DAILY;
+                        monthlyCalendar = Calendar.getInstance();
                         updateDate();
                         Toast.makeText(MainActivity.this, "Day", Toast.LENGTH_SHORT).show();
                         break;
@@ -150,25 +149,34 @@ public class MainActivity extends AppCompatActivity {
                 binding.remainingAmountTextView.setText(String.valueOf(aDouble));
             }
         });
-        mainViewModel.getTransactions(calendar);
+        mainViewModel.getTransactions(monthlyCalendar);
     }
 
     public void getTransactions() {
-        mainViewModel.getTransactions(calendar);
+        mainViewModel.getTransactions(monthlyCalendar);
     }
 
     void updateDate() {
         if (Constants.SELECTED_TAB == Constants.DAILY) {
-            binding.currentDateTextView.setText(Helper.formatDate(calendar.getTime()));
+            binding.currentDateTextView.setText(Helper.formatDate(dailyCalendar.getTime()));
         } else if (Constants.SELECTED_TAB == Constants.MONTHLY){
-            binding.currentDateTextView.setText(Helper.formatDateByMonth(calendar.getTime()));
+            binding.currentDateTextView.setText(Helper.formatDateByMonth(monthlyCalendar.getTime()));
         }
-        mainViewModel.getTransactions(calendar);
+        mainViewModel.getTransactions(getCurrentCalendar());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.bottom_navigation_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    Calendar getCurrentCalendar() {
+        if (Constants.SELECTED_TAB == Constants.DAILY) {
+            return dailyCalendar;
+        } else if (Constants.SELECTED_TAB == Constants.MONTHLY) {
+            return monthlyCalendar;
+        }
+        return null;
     }
 }

@@ -2,11 +2,13 @@ package com.example.dailyexpensemanager.adapters;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dailyexpensemanager.R;
 import com.example.dailyexpensemanager.databinding.RowTransactionsBinding;
+import com.example.dailyexpensemanager.databinding.TransactionDetailsCustomDialogLayoutBinding;
 import com.example.dailyexpensemanager.models.CategoryModel;
 import com.example.dailyexpensemanager.models.TransactionModel;
 import com.example.dailyexpensemanager.utils.Constants;
@@ -82,6 +85,35 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
                 });
                 deleteDialog.show();
                 return false;
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(context);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                TransactionDetailsCustomDialogLayoutBinding binding = TransactionDetailsCustomDialogLayoutBinding.inflate(LayoutInflater.from(context));
+                dialog.setContentView(binding.getRoot());
+
+                //Setting values to the respective textViews
+                binding.dialogTransactionTitle.setText("" + transactionModel.getTransactionTitle());
+                binding.dialogTransactionAmount.setText("" + transactionModel.getTransactionAmount());
+                binding.dialogTransactionType.setText("" + transactionModel.getTransactionType());
+                binding.dialogTransactionCategory.setText("" + transactionModel.getTransactionCategory());
+                binding.dialogTransactionAccount.setText("" + transactionModel.getTransactionAccount());
+                binding.dialogTransactionDate.setText("" + transactionModel.getDate());
+                binding.dialogTransactionNote.setText("" + transactionModel.getTransactionNote());
+
+                Button closeButton = binding.dialogCloseButton;
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
     }
